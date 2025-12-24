@@ -1,59 +1,69 @@
-﻿@page
-@model GreenCharge.Views.Profile.Index
+﻿@model GreenCharge.Models.User
 @{
     ViewData["Title"] = "Profilim";
-    Layout = "_Layout"; // Projende genel bir layout varsa bunu kullanır
+    Layout = "_Layout";
 }
 
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            <div class="card shadow-sm">
-                <div class="card-header bg-success text-white">
-                    <h4 class="mb-0"><i class="bi bi-person-circle"></i> Profil Bilgilerim</h4>
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fa fa-check-circle"></i> @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <div class="card-body">
+            }
 
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-secondary">
-                            Ad Soyad
-                        </div>
-                        <div class="col-sm-8 fw-bold">
-                            @Model.KullaniciAdi
-                        </div>
-                    </div>
-                    <hr>
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-success text-white py-3">
+                    <h4 class="mb-0"><i class="fa fa-user-pen"></i> Profil Bilgilerim</h4>
+                </div>
 
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-secondary">
-                            E-Posta Adresi
-                        </div>
-                        <div class="col-sm-8">
-                            @Model.Email
-                        </div>
-                    </div>
-                    <hr>
+                <div class="card-body p-4">
+                    <form asp-controller="Profile" asp-action="Update" method="post">
 
-                    <div class="row mb-3">
-                        <div class="col-sm-4 text-secondary">
-                            Üyelik Tipi
-                        </div>
-                        <div class="col-sm-8">
-                            Standart Üye
-                        </div>
-                    </div>
+                        <input type="hidden" asp-for="Id" />
 
-                    <div class="row mt-4">
-                        <div class="col-12 text-end">
-                            <button class="btn btn-outline-success">Bilgileri Güncelle</button>
-                            <button class="btn btn-danger">Çıkış Yap</button>
+                        <div class="text-center mb-4">
+                            @if (Model.Role == "Admin")
+                            {
+                                <span class="badge bg-danger fs-6 px-3 py-2 rounded-pill">Yönetici Hesabı</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-info text-dark fs-6 px-3 py-2 rounded-pill">Standart Üye</span>
+                            }
                         </div>
-                    </div>
 
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-secondary">Ad Soyad</label>
+                            <input asp-for="FullName" class="form-control form-control-lg" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-secondary">E-Posta Adresi</label>
+                            <input asp-for="Email" class="form-control bg-light" disabled />
+                            <small class="text-muted">Güvenlik nedeniyle e-posta adresi değiştirilemez.</small>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-secondary">Yeni Şifre</label>
+                            <input name="Password" type="text" class="form-control" placeholder="Değiştirmek istemiyorsanız boş bırakın..." />
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="fa fa-save"></i> Değişiklikleri Kaydet
+                            </button>
+                        </div>
+
+                    </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

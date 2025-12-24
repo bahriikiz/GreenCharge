@@ -4,32 +4,45 @@
 }
 
 <div class="row justify-content-center mt-5">
-    <div class="col-md-6">
-        <div class="card shadow">
-            <div class="card-header bg-success text-white"><h4>Kayıt Ol</h4></div>
-            <div class="card-body">
-                <form asp-action="Register">
-                    <div class="mb-3">
-                        <label>Ad Soyad</label>
-                        <input asp-for="FullName" class="form-control" required />
+    <div class="col-md-5">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-success text-white text-center py-3">
+                <h4 class="mb-0 fw-bold">Yeni Üyelik Oluştur</h4>
+            </div>
+            <div class="card-body p-4">
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger text-center">
+                        <i class="fa fa-exclamation-circle"></i> @ViewBag.Error
                     </div>
+                }
+
+                <form asp-action="Register" method="post">
                     <div class="mb-3">
-                        <label>E-Posta</label>
-                        <input asp-for="Email" type="email" class="form-control" required />
+                        <label class="form-label fw-bold text-secondary">Ad Soyad</label>
+                        <input asp-for="FullName" class="form-control" required placeholder="Adınız ve Soyadınız" />
                     </div>
+
                     <div class="mb-3">
-                        <label>Şifre</label>
-                        <input asp-for="Password" type="password" class="form-control" required />
+                        <label class="form-label fw-bold text-secondary">E-Posta Adresi</label>
+                        <input asp-for="Email" type="email" class="form-control" required placeholder="ornek@email.com" />
                     </div>
+
                     <div class="mb-3">
-                        <label>Hesap Tipi</label>
-                        <select asp-for="Role" class="form-select">
-                            <option value="Member">Üye (Member)</option>
-                            <option value="Admin">Yönetici (Admin)</option>
-                        </select>
+                        <label class="form-label fw-bold text-secondary">Şifre</label>
+                        <input asp-for="Password" type="password" class="form-control" required placeholder="******" />
                     </div>
-                    <button type="submit" class="btn btn-success w-100">Kayıt Ol</button>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-success btn-lg">Kayıt Ol</button>
+                    </div>
                 </form>
+
+                <div class="text-center mt-3">
+                    <small>Zaten hesabınız var mı? <a asp-action="Login" class="text-success fw-bold">Giriş Yap</a></small>
+                </div>
+
             </div>
         </div>
     </div>

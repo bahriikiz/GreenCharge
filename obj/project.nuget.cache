@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FdGQpDpyHQWx5iSf348s7pZNXcEbaxne0eKFJT3qSOINpS993CqmJgR0Sy2GsWGmGNV3QRcsynpom6e+9DTLAA==",
+  "dgSpecHash": "1h3C9wG5tLWsIMhyId01+asx1/ci6BaI80/Qm6oYuOjY5iaPlkIvFHBQJQ+nn5FzI4CcJnJzCa67iJEIEk5zpg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Excalibur\\source\\repos\\GreenCharge\\GreenCharge\\GreenCharge.csproj",
+  "projectFilePath": "C:\\Users\\Excalibur\\source\\repos\\GreenCharge\\GreenCharge.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Excalibur\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Excalibur\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Excalibur\\source\\repos\\GreenCharge\\GreenCharge\\GreenCharge.csproj": {}
+    "C:\\Users\\Excalibur\\source\\repos\\GreenCharge\\GreenCharge.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Excalibur\\source\\repos\\GreenCharge\\GreenCharge\\GreenCharge.csproj": {
+    "C:\\Users\\Excalibur\\source\\repos\\GreenCharge\\GreenCharge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Excalibur\\source\\repos\\GreenCharge\\GreenCharge\\GreenCharge.csproj",
+        "projectUniqueName": "C:\\Users\\Excalibur\\source\\repos\\GreenCharge\\GreenCharge.csproj",
         "projectName": "GreenCharge",
-        "projectPath": "C:\\Users\\Excalibur\\source\\repos\\GreenCharge\\GreenCharge\\GreenCharge.csproj",
+        "projectPath": "C:\\Users\\Excalibur\\source\\repos\\GreenCharge\\GreenCharge.csproj",
         "packagesPath": "C:\\Users\\Excalibur\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Excalibur\\source\\repos\\GreenCharge\\GreenCharge\\obj\\",
+        "outputPath": "C:\\Users\\Excalibur\\source\\repos\\GreenCharge\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,6 +45,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.36, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[6.0.36, )"

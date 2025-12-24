@@ -73,5 +73,7 @@ namespace GreenCharge.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
     }
 }
