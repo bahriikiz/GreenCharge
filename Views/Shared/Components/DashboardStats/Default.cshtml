@@ -1,0 +1,46 @@
+﻿@model (int StationCount, int ReservationCount, List<string> Cities)
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card bg-success text-white shadow-sm mb-3">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">İstasyon Ağı</h5>
+                    <h2 class="fw-bold">@Model.StationCount İstasyon</h2>
+                </div>
+                <i class="fa fa-charging-station fa-3x opacity-50"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card bg-warning text-dark shadow-sm mb-3">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title">Toplam İşlem</h5>
+                    <h2 class="fw-bold">@Model.ReservationCount Rezervasyon</h2>
+                </div>
+                <i class="fa fa-calendar-check fa-3x opacity-50"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-5">
+    <div class="card-header bg-light">
+        <strong><i class="fa fa-map-marker-alt text-danger"></i> Hizmet Verdiğimiz Şehirler</strong>
+    </div>
+    <div class="card-body">
+        @if (Model.Cities.Any())
+        {
+            @foreach (var city in Model.Cities)
+            {
+                <span class="badge bg-secondary me-2 p-2">@city</span>
+            }
+        }
+        else
+        {
+            <span class="text-muted">Henüz istasyon kaydı yok.</span>
+        }
+    </div>
+</div>

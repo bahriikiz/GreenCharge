@@ -1,0 +1,77 @@
+﻿@model IEnumerable<GreenCharge.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<div class="container mt-4">
+    @await Component.InvokeAsync("DashboardStats")
+
+    <hr class="my-5" />
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="card shadow-sm border-primary">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h4 class="mb-0">📅 Rezervasyonlarım</h4>
+                <a asp-controller="Station" asp-action="Index" class="btn btn-light btn-sm text-primary fw-bold">Yeni Rezervasyon Yap</a>
+            </div>
+            <div class="card-body">
+                @if (!Model.Any())
+                {
+                    <div class="alert alert-info text-center">
+                        Henüz aktif bir rezervasyonunuz yok. <br />
+                        <a asp-controller="Station" asp-action="Index" class="fw-bold">Hemen bir istasyon bul!</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>İstasyon</th>
+                                    <th>Tarih</th>
+                                    <th>Süre</th>
+                                    <th>Tutar</th>
+                                    <th class="text-end">İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>@item.Station.Name</strong><br />
+                                            <small class="text-muted">@item.Station.City</small>
+                                        </td>
+                                        <td>@item.ReservationDate.ToString("dd MMM yyyy HH:mm")</td>
+                                        <td><span class="badge bg-secondary">@item.DurationMinutes dk</span></td>
+                                        <td><span class="text-success fw-bold">@item.TotalPrice.ToString("N2") ₺</span></td>
+                                        <td class="text-end">
+                                            <a asp-controller="Reservation" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning text-dark">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a asp-controller="Reservation" asp-action="Cancel" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <h1 class="display-4 text-success fw-bold">GreenCharge'a Hoş Geldiniz</h1>
+            <p class="lead mb-4">Sürdürülebilir enerji ağına katılın, aracınızı kolayca şarj edin.</p>
+            <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-lg px-5">Giriş Yap</a>
+            <a asp-controller="Account" asp-action="Register" class="btn btn-outline-success btn-lg px-5 ms-3">Kayıt Ol</a>
+        </div>
+    }
+</div>

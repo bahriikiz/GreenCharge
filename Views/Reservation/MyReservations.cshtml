@@ -1,0 +1,44 @@
+﻿@model IEnumerable<GreenCharge.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Rezervasyonlarım";
+}
+
+<div class="container mt-5">
+    <h2 class="text-primary mb-4">📅 Geçmiş Rezervasyonlarım</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning">Henüz hiç rezervasyon yapmadınız.</div>
+    }
+    else
+    {
+        <table class="table table-striped border">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>İstasyon</th>
+                    <th>Tarih</th>
+                    <th>Süre (Dk)</th>
+                    <th>Toplam Tutar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Station.Name</td>
+                        <td>@item.ReservationDate.ToString("dd.MM.yyyy HH:mm")</td>
+
+                        <td>
+                            <span class="badge bg-light text-dark border">
+                                <i class="fa fa-clock"></i> @item.DurationMinutes dk
+                            </span>
+                        </td>
+
+                        <td><strong class="text-success">@item.TotalPrice ₺</strong></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

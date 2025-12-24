@@ -1,0 +1,59 @@
+﻿@page
+@model GreenCharge.Views.Profile.Index
+@{
+    ViewData["Title"] = "Profilim";
+    Layout = "_Layout"; // Projende genel bir layout varsa bunu kullanır
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0"><i class="bi bi-person-circle"></i> Profil Bilgilerim</h4>
+                </div>
+                <div class="card-body">
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-secondary">
+                            Ad Soyad
+                        </div>
+                        <div class="col-sm-8 fw-bold">
+                            @Model.KullaniciAdi
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-secondary">
+                            E-Posta Adresi
+                        </div>
+                        <div class="col-sm-8">
+                            @Model.Email
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-secondary">
+                            Üyelik Tipi
+                        </div>
+                        <div class="col-sm-8">
+                            Standart Üye
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12 text-end">
+                            <button class="btn btn-outline-success">Bilgileri Güncelle</button>
+                            <button class="btn btn-danger">Çıkış Yap</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

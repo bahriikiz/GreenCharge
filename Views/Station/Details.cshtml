@@ -1,0 +1,139 @@
+﻿@model GreenCharge.Models.Station
+
+@{
+    ViewData["Title"] = Model.Name + " Detayları";
+
+    // Ortalama Puan Hesabı
+    double averageRating = 0;
+    if (Model.Reviews != null && Model.Reviews.Any())
+    {
+        averageRating = Model.Reviews.Average(r => r.Rating);
+    }
+}
+
+<div class="container mt-5">
+    <div class="card shadow mb-4 border-success">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2 class="text-success"><i class="fa fa-charging-station"></i> @Model.Name</h2>
+                    <p class="text-muted"><i class="fa fa-map-marker-alt text-danger"></i> @Model.City - @Model.Address</p>
+
+                    <div class="mb-3">
+                        <span class="badge bg-warning text-dark fs-6">
+                            Ortalama Puan: @averageRating.ToString("0.0") / 5
+                            <i class="fa fa-star"></i>
+                        </span>
+                        <span class="ms-2 text-muted">(@(Model.Reviews?.Count ?? 0) Yorum)</span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        @if (Model.IsActive)
+                        {
+                            <a asp-controller="Reservation" asp-action="Create" asp-route-stationId="@Model.Id" class="btn btn-primary btn-lg">
+                                <i class="fa fa-calendar-check"></i> Hemen Rezervasyon Yap
+                            </a>
+                        }
+                        else
+                        {
+                            <button class="btn btn-secondary btn-lg" disabled>Hizmet Dışı</button>
+                        }
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg">Listeye Dön</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-light">
+                            <strong><i class="fa fa-map-marked-alt text-success"></i> İstasyon Konumu</strong>
+                        </div>
+                        <div class="card-body p-0">
+                            @if (!string.IsNullOrEmpty(Model.LocationCode))
+                            {
+                                <div class="ratio ratio-1x1">
+                                    @Html.Raw(Model.LocationCode)
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="text-center p-5 text-muted">
+                                    <i class="fa fa-map-slash fa-4x mb-3 opacity-25"></i>
+                                    <p>Bu istasyon için henüz harita bilgisi eklenmemiş.</p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7">
+            <h4 class="mb-3">Kullanıcı Yorumları</h4>
+            @if (Model.Reviews != null && Model.Reviews.Any())
+            {
+                @foreach (var review in Model.Reviews.OrderByDescending(r => r.CreatedAt))
+                {
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="fw-bold">@review.User.FullName</h6>
+                                <small class="text-muted">@review.CreatedAt.ToString("dd.MM.yyyy")</small>
+                            </div>
+                            <div class="text-warning mb-2">
+                                @for (int i = 0; i < review.Rating; i++)
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
+                            </div>
+                            <p class="card-text">@review.Comment</p>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="alert alert-light border">Henüz yorum yapılmamış. İlk yorumu sen yap!</div>
+            }
+        </div>
+
+        <div class="col-md-5">
+            <div class="card shadow-sm bg-light">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa fa-pen"></i> Puan Ver & Yorum Yap</h5>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form asp-action="AddReview" method="post">
+                            <input type="hidden" name="stationId" value="@Model.Id" />
+
+                            <div class="mb-3">
+                                <label class="form-label">Puanınız</label>
+                                <select name="rating" class="form-select" required>
+                                    <option value="5">⭐⭐⭐⭐⭐ - Mükemmel</option>
+                                    <option value="4">⭐⭐⭐⭐ - İyi</option>
+                                    <option value="3">⭐⭐⭐ - Orta</option>
+                                    <option value="2">⭐⭐ - Kötü</option>
+                                    <option value="1">⭐ - Çok Kötü</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Yorumunuz</label>
+                                <textarea name="comment" class="form-control" rows="3" placeholder="Deneyimlerinizi paylaşın..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-success w-100">Gönder</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            Yorum yapmak için <a asp-controller="Account" asp-action="Login">Giriş Yap</a>malısınız.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

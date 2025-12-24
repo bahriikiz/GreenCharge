@@ -1,0 +1,28 @@
+﻿@model GreenCharge.Models.Reservation
+@{
+    ViewData["Title"] = "Rezervasyonu Güncelle";
+}
+
+<div class="container mt-5">
+    <h3>Rezervasyonu Güncelle</h3>
+    <hr />
+    <div class="card shadow p-4">
+        <h5>@ViewBag.StationName İstasyonu</h5>
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="StationId" />
+            <input type="hidden" asp-for="UserId" /> <div class="row mt-3">
+                <div class="col-md-6 mb-3">
+                    <label>Tarih</label>
+                    <input asp-for="ReservationDate" class="form-control" type="datetime-local" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Süre (Dakika)</label>
+                    <input asp-for="DurationMinutes" type="number" min="10" max="1440" class="form-control" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-warning">Güncelle</button>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Vazgeç</a>
+        </form>
+    </div>
+</div>

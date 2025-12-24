@@ -1,0 +1,45 @@
+﻿@model GreenCharge.Models.Station
+
+@{
+    ViewData["Title"] = "Sil";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h4><i class="fa fa-exclamation-triangle"></i> İstasyonu Sil</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center text-danger mb-4">Bu istasyonu silmek istediğinize emin misiniz?</h5>
+
+                    <dl class="row">
+                        <dt class="col-sm-4">İstasyon Adı:</dt>
+                        <dd class="col-sm-8"><strong>@Model.Name</strong></dd>
+
+                        <dt class="col-sm-4">Şehir:</dt>
+                        <dd class="col-sm-8">@Model.City</dd>
+
+                        <dt class="col-sm-4">Durum:</dt>
+                        <dd class="col-sm-8">
+                            @(Model.IsActive ? "Aktif" : "Pasif")
+                        </dd>
+                    </dl>
+
+                    <div class="alert alert-warning text-sm">
+                        <small><strong>Dikkat:</strong> Bu istasyonu silerseniz, bu istasyona ait geçmiş rezervasyon kayıtları da etkilenebilir.</small>
+                    </div>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger btn-lg">Evet, Sil</button>
+                            <a asp-action="Index" class="btn btn-secondary">Vazgeç</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

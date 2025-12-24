@@ -1,0 +1,19 @@
+﻿@model GreenCharge.Models.Reservation
+@{
+    ViewData["Title"] = "İptal Et";
+}
+
+<div class="container mt-5 text-center">
+    <div class="alert alert-danger shadow">
+        <h4><i class="fa fa-exclamation-circle"></i> Rezervasyonu İptal Et</h4>
+        <p class="lead">Bu rezervasyonu silmek istediğinize emin misiniz?</p>
+        <p><strong>İstasyon:</strong> @Model.Station.Name</p>
+        <p><strong>Tarih:</strong> @Model.ReservationDate.ToString("g")</p>
+
+        <form asp-action="Cancel">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger btn-lg">Evet, İptal Et</button>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary btn-lg">Vazgeç</a>
+        </form>
+    </div>
+</div>

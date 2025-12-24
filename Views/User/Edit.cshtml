@@ -1,0 +1,35 @@
+﻿@model GreenCharge.Models.User
+@{
+    ViewData["Title"] = "Kullanıcı Düzenle";
+}
+
+<div class="container mt-5">
+    <div class="card shadow col-md-6 mx-auto">
+        <div class="card-header bg-warning"><h4>Kullanıcıyı Düzenle</h4></div>
+        <div class="card-body">
+            <form asp-action="Edit" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="mb-3">
+                    <label>Ad Soyad</label>
+                    <input asp-for="FullName" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label>E-Posta</label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label>Şifre (Boş bırakırsan değişmez)</label>
+                    <input name="Password" type="text" class="form-control" placeholder="Yeni şifre..." />
+                </div>
+                <div class="mb-3">
+                    <label>Rol</label>
+                    <select asp-for="Role" class="form-select">
+                        <option value="Member">Member (Normal Üye)</option>
+                        <option value="Admin">Admin (Yönetici)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Kaydet</button>
+            </form>
+        </div>
+    </div>
+</div>
